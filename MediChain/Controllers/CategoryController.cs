@@ -7,14 +7,14 @@ namespace MediChain.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository repo;
-        public CategoryController(ICategoryRepository _repo)
+        private readonly IUnitOfWork repo;
+        public CategoryController(IUnitOfWork _repo)
         {
             repo = _repo;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = repo.GetAll().ToList();
+            List<Category> objCategoryList = repo.Category.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -31,7 +31,7 @@ namespace MediChain.Controllers
             }
             if (ModelState.IsValid)
             {
-                repo.Add(category);
+                repo.Category.Add(category);
                 repo.Save();
                 TempData["success"] = "Category has been added successfully.";
                 return RedirectToAction("Index");
@@ -44,7 +44,7 @@ namespace MediChain.Controllers
             {
                 return NotFound();
             }
-            Category? category = repo.Get(u => u.CategoryId==id);
+            Category? category = repo.Category.Get(u => u.CategoryId==id);
             if(category == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace MediChain.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Update(obj);
+                repo.Category.Update(obj);
                 repo.Save();
                 TempData["success"] = "Category has been updated successfully.";
                 return RedirectToAction("Index");
@@ -69,7 +69,7 @@ namespace MediChain.Controllers
             {
                 return NotFound();
             }
-            Category? category = repo.Get(u => u.CategoryId == id);
+            Category? category = repo.Category.Get(u => u.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -79,12 +79,12 @@ namespace MediChain.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? category = repo.Get(u => u.CategoryId == id);
+            Category? category = repo.Category.Get(u => u.CategoryId == id);
             if(category == null)
             {
                 return NotFound();
             }
-            repo.Remove(category);
+            repo.Category.Remove(category);
             repo.Save();
             TempData["success"] = "Category has been deleted successfully.";
             return RedirectToAction("Index");

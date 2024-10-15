@@ -11,10 +11,6 @@ namespace MediChain.Repository
         {
             db = _db;
         }
-        public void Save()
-        {
-            db.SaveChanges();
-        }
 
         public void Update(Category category)
         {
