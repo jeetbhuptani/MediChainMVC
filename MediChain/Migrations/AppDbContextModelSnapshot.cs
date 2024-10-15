@@ -31,7 +31,8 @@ namespace MediChain.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");

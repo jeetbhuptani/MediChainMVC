@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediChain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241014152958_addCategoryTable")]
-    partial class addCategoryTable
+    [Migration("20241015183129_AddCategory")]
+    partial class AddCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,16 +32,37 @@ namespace MediChain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Medicine",
+                            DisplayOrder = 1
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Medical Equipment",
+                            DisplayOrder = 2
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Miscellaneous",
+                            DisplayOrder = 3
+                        });
                 });
 #pragma warning restore 612, 618
         }

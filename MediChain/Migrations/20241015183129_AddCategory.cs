@@ -7,15 +7,24 @@
 namespace MediChain.Migrations
 {
     /// <inheritdoc />
-    public partial class seedcategorytable : Migration
+    public partial class AddCategory : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "Categories",
-                newName: "CategoryName");
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -31,25 +40,8 @@ namespace MediChain.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "CategoryId",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "CategoryId",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Categories",
-                keyColumn: "CategoryId",
-                keyValue: 3);
-
-            migrationBuilder.RenameColumn(
-                name: "CategoryName",
-                table: "Categories",
-                newName: "Name");
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -1,19 +1,20 @@
 ﻿using MediChain.Data;
 using MediChain.Models;
+using MediChain.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediChain.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly AppDbContext db;
-        public CategoryController(AppDbContext _db)
+        private readonly ICategoryRepository repo;
+        public CategoryController(ICategoryRepository _repo)
         {
-            db = _db;
+            repo = _repo;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = db.Categories.ToList();
+            List<Category> objCategoryList = repo.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -30,8 +31,8 @@ namespace MediChain.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                repo.Add(category);
+                repo.Save();
                 TempData["success"] = "Category has been added successfully.";
                 return RedirectToAction("Index");
             }
@@ -43,7 +44,7 @@ namespace MediChain.Controllers
             {
                 return NotFound();
             }
-            Category? category = db.Categories.FirstOrDefault<Category>(u => u.CategoryId==id);
+            Category? category = repo.Get(u => u.CategoryId==id);
             if(category == null)
             {
                 return NotFound();
@@ -55,8 +56,8 @@ namespace MediChain.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Update(obj);
-                db.SaveChanges();
+                repo.Update(obj);
+                repo.Save();
                 TempData["success"] = "Category has been updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -68,7 +69,7 @@ namespace MediChain.Controllers
             {
                 return NotFound();
             }
-            Category? category = db.Categories.Find(id);
+            Category? category = repo.Get(u => u.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -78,13 +79,13 @@ namespace MediChain.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? category = db.Categories.Find(id);
+            Category? category = repo.Get(u => u.CategoryId == id);
             if(category == null)
             {
                 return NotFound();
             }
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            repo.Remove(category);
+            repo.Save();
             TempData["success"] = "Category has been deleted successfully.";
             return RedirectToAction("Index");
         }
