@@ -1,10 +1,13 @@
 ﻿using MediChain.Data;
 using MediChain.Models;
 using MediChain.Repository.IRepository;
+using MediChain.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediChain.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork repo;

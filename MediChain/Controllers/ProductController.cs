@@ -1,11 +1,14 @@
 ﻿using MediChain.Models;
 using MediChain.Models.ViewModels;
 using MediChain.Repository.IRepository;
+using MediChain.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MediChain.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork repo;
