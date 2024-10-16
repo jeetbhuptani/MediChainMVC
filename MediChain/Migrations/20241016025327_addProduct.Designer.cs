@@ -3,6 +3,7 @@ using MediChain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediChain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016025327_addProduct")]
+    partial class addProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,17 +73,10 @@ namespace MediChain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -92,76 +88,51 @@ namespace MediChain.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             ProductId = 1,
-                            CategoryId = 1,
                             Description = "500MG,Painkiller",
-                            ImageUrl = "",
                             Price = 10.0,
                             ProductName = "Paracetamol"
                         },
                         new
                         {
                             ProductId = 2,
-                            CategoryId = 2,
                             Description = "3 Ply, Pack of 50",
-                            ImageUrl = "",
                             Price = 50.0,
                             ProductName = "Surgical Mask"
                         },
                         new
                         {
                             ProductId = 3,
-                            CategoryId = 3,
                             Description = "500ML, 70% Alcohol",
-                            ImageUrl = "",
                             Price = 100.0,
                             ProductName = "Hand Sanitizer"
                         },
                         new
                         {
                             ProductId = 4,
-                            CategoryId = 2,
                             Description = "Infrared, Non-Contact",
-                            ImageUrl = "",
                             Price = 200.0,
                             ProductName = "Digital Thermometer"
                         },
                         new
                         {
                             ProductId = 5,
-                            CategoryId = 2,
                             Description = "Pack of 10",
-                            ImageUrl = "",
                             Price = 150.0,
                             ProductName = "Face Shield"
                         },
                         new
                         {
                             ProductId = 6,
-                            CategoryId = 2,
                             Description = "Fingertip, Blood Oxygen Monitor",
-                            ImageUrl = "",
                             Price = 500.0,
                             ProductName = "Pulse Oximeter"
                         });
-                });
-
-            modelBuilder.Entity("MediChain.Models.Product", b =>
-                {
-                    b.HasOne("MediChain.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

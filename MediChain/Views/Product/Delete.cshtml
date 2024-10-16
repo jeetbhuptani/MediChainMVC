@@ -1,0 +1,32 @@
+﻿@model Product
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-dark-subtle m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">Delete Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="bg-light-subtle">
+            <div class="border p-3 mt-4">
+                <input asp-for="ProductId" hidden />
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ProductName" class="form-control border-0 shadow" disabled />
+                    <label asp-for="ProductName" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Description" class="form-control border-0 shadow" disabled />
+                    <label asp-for="Description" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price" class="form-control border-0 shadow" disabled />
+                    <label asp-for="Price" class="ms-2"></label>
+                </div>
+                <button type="submit" class="btn btn-danger form-control mt-2" style="width:150px">Delete</button>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control mt-2" style="width:150px">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+

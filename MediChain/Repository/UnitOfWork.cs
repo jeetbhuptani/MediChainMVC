@@ -7,10 +7,12 @@ namespace MediChain.Repository
     {
         private readonly AppDbContext db;
         public ICategoryRepository Category { get;private set; }
+        public IProductRepository Product { get; private set; }
         public UnitOfWork(AppDbContext _db)
         {
             db = _db;
             Category = new CategoryRepository(db);
+            Product = new ProductRepository(db);
         }
         public void Save()
         {

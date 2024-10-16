@@ -3,6 +3,7 @@ using MediChain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediChain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016033641_addForeignKeyToProduct")]
+    partial class addForeignKeyToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,10 +81,6 @@ namespace MediChain.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -102,7 +101,6 @@ namespace MediChain.Migrations
                             ProductId = 1,
                             CategoryId = 1,
                             Description = "500MG,Painkiller",
-                            ImageUrl = "",
                             Price = 10.0,
                             ProductName = "Paracetamol"
                         },
@@ -111,7 +109,6 @@ namespace MediChain.Migrations
                             ProductId = 2,
                             CategoryId = 2,
                             Description = "3 Ply, Pack of 50",
-                            ImageUrl = "",
                             Price = 50.0,
                             ProductName = "Surgical Mask"
                         },
@@ -120,7 +117,6 @@ namespace MediChain.Migrations
                             ProductId = 3,
                             CategoryId = 3,
                             Description = "500ML, 70% Alcohol",
-                            ImageUrl = "",
                             Price = 100.0,
                             ProductName = "Hand Sanitizer"
                         },
@@ -129,7 +125,6 @@ namespace MediChain.Migrations
                             ProductId = 4,
                             CategoryId = 2,
                             Description = "Infrared, Non-Contact",
-                            ImageUrl = "",
                             Price = 200.0,
                             ProductName = "Digital Thermometer"
                         },
@@ -138,7 +133,6 @@ namespace MediChain.Migrations
                             ProductId = 5,
                             CategoryId = 2,
                             Description = "Pack of 10",
-                            ImageUrl = "",
                             Price = 150.0,
                             ProductName = "Face Shield"
                         },
@@ -147,7 +141,6 @@ namespace MediChain.Migrations
                             ProductId = 6,
                             CategoryId = 2,
                             Description = "Fingertip, Blood Oxygen Monitor",
-                            ImageUrl = "",
                             Price = 500.0,
                             ProductName = "Pulse Oximeter"
                         });

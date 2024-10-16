@@ -1,4 +1,5 @@
 using MediChain.Models;
+using MediChain.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,17 @@ namespace MediChain.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork unitOfWork;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork _unitOfWork)
         {
             _logger = logger;
+            unitOfWork = _unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = unitOfWork.Product.GetAll(includeProperties: "Category");
+            return View(productList);
         }
 
         public IActionResult Privacy()
