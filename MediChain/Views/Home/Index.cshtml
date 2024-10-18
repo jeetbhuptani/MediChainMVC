@@ -13,13 +13,9 @@
                         <div class="card-body pb-0 d-flex flex-column justify-content-between">
                             <div class="ps-1" style="min-height">
                                 <p class="card-title h5 text-dark opacity-75 text-center">@product.ProductName</p>
-                                <p class="card-text text-center text-dark h6">by Dealer</p>
                             </div>
                             <div class="ps-1">
                                 <p class="text-dark opacity-75 text-center">MRP: <span>₹ @product.Price</span></p>
-                            </div>
-                            <div class="ps-1">
-                                <p class="text-dark opacity-75 text-center">As low as <span>₹ @product.Price</span></p>
                             </div>
                         </div>
                         <a asp-controller="Home" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-primary bg-gradient border-0 form-control">

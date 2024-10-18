@@ -122,14 +122,5 @@ namespace MediChain.Controllers
             TempData["success"] = "Product has been deleted successfully.";
             return RedirectToAction("Index");
         }
-
-        #region API CAllS
-        public IActionResult GetAll()
-        {
-            List<Product> objProductList = repo.Product.GetAll(includeProperties: "Category").ToList();
-            return Json(new { data = objProductList });
-        }
-
-        #endregion
     }
 }
