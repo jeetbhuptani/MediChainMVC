@@ -96,10 +96,10 @@ dotnet run
 ```
 ## System Designs
 ### Architecture and Work Flow
-![Work Flow](images/Flow.jpg)
+![Work Flow](Images/Flow.jpg)
 
 ### Entity Relationship
-![ER](images/ER.jpg)
+![ER](Images/ER.jpg)
 
 ### Members
 <a href="https://github.com/kavyashah26" target="_blank">
