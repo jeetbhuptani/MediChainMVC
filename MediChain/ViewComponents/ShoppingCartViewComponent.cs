@@ -19,7 +19,7 @@ namespace MediChain.ViewComponents
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (claim != null)
             {
-                if (HttpContext.Session.GetInt32(SD.SessionCart) == null)
+                if (HttpContext.Session.GetInt32(SD.SessionCart) != null)
                 {
                     HttpContext.Session.SetInt32(SD.SessionCart,
                     _unitOfWork.ShoppingCart.GetAll(u => u.AppUserId == claim.Value).Count());

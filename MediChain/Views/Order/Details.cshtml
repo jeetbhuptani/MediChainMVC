@@ -141,17 +141,13 @@
                                     </div>
                                 </li>
                             </ul>
-                            @if (Model.OrderHeader.OrderStatus == SD.StatusShipped)
-                            {
-                                <button type="submit" class="btn btn-success form-control my-1">Pay Now</button>
-                            }
                             @if (User.IsInRole(SD.Role_Admin))
                             {
                                 @if (Model.OrderHeader.OrderStatus == SD.StatusInProcess)
                                 {
                                     <button type="submit" asp-action="ShipOrder" onclick="return validateInput()" class="btn btn-primary form-control my-1">Approve Order</button>
                                 }
-                                @if (Model.OrderHeader.OrderStatus != SD.StatusRefunded && Model.OrderHeader.OrderStatus != SD.StatusCancelled && Model.OrderHeader.OrderStatus != SD.StatusShipped)
+                                @if (Model.OrderHeader.OrderStatus != SD.StatusApproved && Model.OrderHeader.OrderStatus != SD.StatusShipped)
                                 {
                                     <button asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1">Cancel Order</button>
                                 }
